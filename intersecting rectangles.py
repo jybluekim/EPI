@@ -43,20 +43,36 @@ def find_int (R1, R2):
     #label = Text(
     #label = Text(Point(100, 120), 'A face')Point(100, 120), 'A face')
     #label.draw(win)
+
+    #figure out overlap here
+    ret = True
+    if R2[1] >= R1[1]+R1[3]:
+        ret = False
+    elif R1[1] >= R2[1]+R2[3]:
+        ret = False
+    elif R2[0] >= R1[0]+R1[2]:
+        ret = False
+    elif R1[0] >= R2[0]+R2[2]:
+        ret = False
+    else:
+        ret = True
+        listx = [R1[0],R1[2],R2[0],R2[2]]
+        listx.sort()
+        listx.pop(0)
+        listx.pop(2)
+        listy = [R1[1],R1[3],R2[1],R2[3]]
+        listy.sort()
+        listy.pop(0)
+        listy.pop(2)
+        #list x = point 1(x), point2(x), list y = point3(y), point4 (y)
+        intersection = Rectangle(Point(listx[0],listy[0]),Point(listx[0]+listx[1],listy[0]+listy[1]))
+        intersection.setFill("yellow")
+        intersection.draw(win)
+    label = Text(Point(100, 120), ret)
+    label.draw(win)
     win.getMouse()
     win.close()
-    #figure out overlap here
-    if R2[1] >= R1[1]+R1[3]:
-        return False
-    elif R1[1] >= R2[1]+R2[3]:
-        return False
-    elif R2[0] >= R1[0]+R1[2]:
-        return False
-    elif R1[0] >= R2[0]+R2[2]:
-        return False
-    else:
-        return True
-
+    return ret
 
 def random_numbers():
     list = []
@@ -73,6 +89,7 @@ def calling_main():
 
         z = find_int(x, y)
         print (x,y,z)
+
 
 
 calling_main()
