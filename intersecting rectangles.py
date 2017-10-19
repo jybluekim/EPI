@@ -56,16 +56,11 @@ def find_int (R1, R2):
         ret = False
     else:
         ret = True
-        listx = [R1[0],R1[2],R2[0],R2[2]]
+        listx = [R1[0],R1[0]+R1[2],R2[0],R2[0]+R2[2]]
         listx.sort()
-        listx.pop(0)
-        listx.pop(2)
-        listy = [R1[1],R1[3],R2[1],R2[3]]
+        listy = [R1[1],R1[1]+R1[3],R2[1],R2[1]+R2[3]]
         listy.sort()
-        listy.pop(0)
-        listy.pop(2)
-        #list x = point 1(x), point2(x), list y = point3(y), point4 (y)
-        intersection = Rectangle(Point(listx[0],listy[0]),Point(listx[0]+listx[1],listy[0]+listy[1]))
+        intersection = Rectangle(Point(listx[1],listy[1]),Point(listx[2],listy[2]))
         intersection.setFill("yellow")
         intersection.draw(win)
     label = Text(Point(100, 120), ret)
